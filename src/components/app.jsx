@@ -1,4 +1,3 @@
-import giphy from 'giphy-api';
 import React, { Component } from 'react';
 
 import Gif from './gif';
@@ -26,7 +25,6 @@ class App extends Component {
       rating: 'r',
       limit: 15
     }, (err, res) => {
-      console.log(res);
       this.setState({
         gifs: res.data
       });
@@ -40,20 +38,22 @@ class App extends Component {
   }
 
   render() {
+    const { selectedGifID, gifs } = this.state;
+
     return (
       <div>
         <div className="left-scene">
           <SearchBar searchFunction={this.search} />
           <div className="selected-gif">
             <Gif
-              id={this.state.selectedGifID}
+              id={selectedGifID}
               selectGif={this.selectGif}
             />
           </div>
         </div>
         <div className="right-scene">
           <GifList
-            gifs={this.state.gifs}
+            gifs={gifs}
             selectGif={this.selectGif}
           />
         </div>
